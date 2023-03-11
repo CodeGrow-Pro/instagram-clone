@@ -1,5 +1,5 @@
 const express = require('express');
-const { createPost, getAllPost, getPostById, getPostByOtherUserId, addCommentById, addLikes } = require('../../../controllers/post.controller');
+const { createPost, getAllPost, getPostById, getPostByOtherUserId, addCommentById, addLikes, addSave } = require('../../../controllers/post.controller');
 const userController = require('../../../controllers/user.controller')
 const authMiddleware = require('../../../middleware/authValidate.middleware')
 const {loginBodyValidate} = require('../../../middleware/authValidate.middleware')
@@ -18,7 +18,7 @@ route.post('/post/create',authMiddleware.isValieduser,authMiddleware.uploadImage
 route.get('/post/fetch',authMiddleware.isValieduser,getAllPost)
 route.get('/post/find',authMiddleware.isValieduser,getPostById)
 route.get('/post/friend',authMiddleware.isValieduser,getPostByOtherUserId)
-route.put('/post/save',authMiddleware.isValieduser,userController.postSaved);
 route.put('/post/add-comment',authMiddleware.isValieduser,addCommentById)
 route.put('/post/like',authMiddleware.isValieduser,addLikes);
+route.put("/post/save",authMiddleware.isValieduser,addSave)
 module.exports = route;

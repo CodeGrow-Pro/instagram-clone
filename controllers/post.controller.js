@@ -96,11 +96,32 @@ exports.addLikes = async (req, res) => {
            if(status==true){
               post.likes.push(req.userId)
            }else{
-              post.likes = post.likes.filter((like)=> like.likes!=req.userId)
+              post.likes = post.likes.filter((like)=> like!=req.userId)
            }
         await post.save()
         return res.status(200).send({
             message:"like successfully."
+        })
+    } catch (error) {
+        console.log(error.message)
+        return res.status(500).send({
+            message: "Internal server error"
+        })
+    }
+}
+exports.addSave = async (req, res) => {
+    const postid = req.body.postid
+    const status = req.body.status
+    try {
+           const post = await POST.findOne({_id:postid})
+           if(status==true){
+              post.postSave.push(req.userId)
+           }else{
+              post.postSave = post.postSave.filter((s)=> s!=req.userId)
+           }
+        await post.save()
+        return res.status(200).send({
+            message:"saved successfully."
         })
     } catch (error) {
         console.log(error.message)

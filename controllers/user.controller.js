@@ -67,7 +67,7 @@ exports.login = async (req, res) => {
         })
         return res.status(200).send({
             message: "login successfully",
-            username: user.username,
+            userId:user._id,
             accessToken: token
         })
     } catch (err) {
