@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cors())
 app.get('/',(req,res)=>{
-    return res.status(200).send("welcome to Delivery service app!");
+    return res.status(200).send("welcome to instagram clone app");
 })
 app.use('/instagram',routers);
 module.exports = app;
