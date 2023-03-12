@@ -6,7 +6,9 @@ const fileUpload = require('express-fileupload');
 const app = express();
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    origin:'*'
+}))
 app.get('/',(req,res)=>{
     return res.status(200).send("welcome to instagram clone app");
 })

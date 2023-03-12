@@ -7,10 +7,10 @@ exports.createPost = async (req, res) => {
         title: req.body.title,
         location: req.body.location
     }
+    console.log(data)
     if (req.files.upload) {
      try {
         cloudinary.uploader.upload(req.files.upload.tempFilePath, async (error,result)=>{
-            console.log(result)
             data.image = result.secure_url;
             try {
              const post = await POST.create(data)
