@@ -2,6 +2,8 @@ const userModel = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const key = require('../configs/scretKey')
 const jwt = require('jsonwebtoken')
+const cloudinary = require('cloudinary').v2
+const { cloudinaryConnecton } = require('../configs/scretKey');
 const fs = require('fs')
 const {
     signup
@@ -146,22 +148,26 @@ exports.UpdateUser = async (req, res) => {
     if(body.mobile){
         reqData.mobile = body.mobile
     }
-    if(req.file){
-        reqData.avtar=fs.readFileSync(req.file.destination+'/'+req.file.filename)
+    if(req.files.upload){
+        cloudinary.uploader.upload(req.files.upload.tempFilePath, async (error,result)=>{
+            reqData.avtar=result.secure_url
+            try {
+                const user = await userModel.findOneAndUpdate({
+                    _id: req.userId
+                }, reqData)
+                return res.status(200).send({
+                    message: "User update successfully!"
+                })
+            } catch (err) {
+                console.log(err.message)
+                return res.status(500).send({
+                    message: "internal server error!"
+                })
+            }
+        }
+        )
     }
-    try {
-        const user = await userModel.findOneAndUpdate({
-            _id: req.userId
-        }, reqData)
-        return res.status(200).send({
-            message: "User update successfully!"
-        })
-    } catch (err) {
-        console.log(err.message)
-        return res.status(500).send({
-            message: "internal server error!"
-        })
-    }
+
 }
 
 exports.follow = async (req,res)=>{

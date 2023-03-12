@@ -10,11 +10,11 @@ route.post('/signup',loginBodyValidate,userController.signup)
 route.post('/login',loginBodyValidate,userController.login);
 //---------------------------------------user find -------------------------------
 route.get('/user/filter',authMiddleware.isValieduser,userController.filter);
-route.put('/user/update',authMiddleware.isValieduser,authMiddleware.uploadImage,userController.UpdateUser)
+route.put('/user/update',authMiddleware.isValieduser,userController.UpdateUser)
 route.get('/user/find',authMiddleware.isValieduser,userController.getUser);
 route.put('/user/follow',authMiddleware.isValieduser,userController.follow)
 //---------------------------------------POSTS -----------------------------------------
-route.post('/post/create',authMiddleware.isValieduser,authMiddleware.uploadImage,createPost)
+route.post('/post/create',authMiddleware.isValieduser,createPost)
 route.get('/post/fetch',authMiddleware.isValieduser,getAllPost)
 route.get('/post/find',authMiddleware.isValieduser,getPostById)
 route.get('/post/friend',authMiddleware.isValieduser,getPostByOtherUserId)

@@ -7,7 +7,7 @@ const postSchema = new mongoose.Schema({
         type: Number,
     },
     image: {
-        type: Buffer
+        type: String
     },
     comment: {
         type: [],

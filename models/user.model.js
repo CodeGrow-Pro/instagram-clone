@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     avtar:{
-        type:Buffer
+        type:String
     },
     email: {
         type: String,
