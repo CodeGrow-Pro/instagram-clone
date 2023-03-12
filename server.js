@@ -10,5 +10,7 @@ mongoose.connect("mongodb+srv://instagramdb:xthoG0RuqnWqnMtV@cluster0.8v0a0xv.mo
             app.listen(process.env.PORT || 5000,()=>{
                 console.log('App started at port : ',process.env.PORT || 5000)
             })
+          }else{
+            console.log("Database Not connected! or Check your Internet connection!")
           }
 })
